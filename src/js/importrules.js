@@ -417,7 +417,7 @@ export function init() {
     ['Waar zijn die nerds! Drink $ keer als je ooit meer dan 4u aan een stuk een videospel hebt gespeeld', 1, 0, '', ''],
     ['Klootzakken die geld hebben gestolen van een kennis drinken $ keer', 1, 0, '', ''],
     ['Drink $ keer als je recent hebt gedroomt over iets wat je niet eens aan je beste vriend of vriendin kan vertellen...', 1, 0, '', ''],
-    ['Drink $ keer als, zoals een zwerver, je je halte gemist had omdat je in slaap was gevallen', 1, 0, '', ''],
+    ['Drink $ keer als, zoals een zwerver, je ooit je halte gemist hebt omdat je in slaap was gevallen', 1, 0, '', ''],
     ['Wie vandaag als eerst zijn glas had gevuld mag $ slokken uitdelen', 1, 0, '', ''],
     ['Wie als laatst zijn glas heeft bijgevuld moet $ keer drinken', 1, 0, '', ''],
     ['Drink $ keer als je een Windows phone hebt', 1, 0, '', ''],

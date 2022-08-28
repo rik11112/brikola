@@ -15,12 +15,17 @@ const namenContainer = document.getElementById("namen");
 let players = [];
 let rules;
 let count = 0;
-document.body.addEventListener('click', () => {
+//when you go to the game tab
+util.addClickListener('nav-game-tab', () => {
     players = Array.from(namenContainer.getElementsByTagName('input')).map(i => i.value).filter(val => val !== '');
     if (rules == undefined) {
         rules = importrules.init();
         next();
     }
+}, true);
+//when you click on the screen
+util.addClickListener('nav-game', () => {
+    next();
 }, true);
 
 export default class Rule {

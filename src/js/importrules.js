@@ -1570,7 +1570,7 @@ export function init() {
             const slides = j[3] === '' ? [last[0], j[0]] : [j[0], last[0]];
             rules.push(new Rule(slides, j[4], "to-be-continued", last[5] || ''));
         } else if (j[3] === '' && j[4] === '') {
-            rules.push(new Rule([j[0]], j[3], 'joink1', j[5] || ''));
+            rules.push(new Rule([j[0]], j[3], 'joink2', j[5] || ''));
         }
         last = j;
     });

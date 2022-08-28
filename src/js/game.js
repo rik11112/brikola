@@ -94,10 +94,13 @@ function next() {
             if (goe === false) {
                 //nie goe, skippe
                 rule.skipped = true;
-                rule = rules[count++];
             } else {
                 //goe, probere te vullen
                 goe = rule.fill();
+            }
+
+            if (goe === false) {
+                rule = rules[count++];
             }
         }
     } else {

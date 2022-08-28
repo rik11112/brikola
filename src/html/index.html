@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo: npm / webpack</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="d-flex justify-content-center nav nav-pills container-fluid ms-3 me-3" id="nav-tab" role="tablist">
+            <button class="nav-link" id="nav-game-tab" data-bs-toggle="pill" data-bs-target="#nav-game" role="pill"
+                aria-controls="nav-game" aria-selected="false">game</button>
+            <button class="nav-link" id="nav-settings-tab" data-bs-toggle="pill" data-bs-target="#nav-settings"
+                role="pill" aria-controls="nav-settings" aria-selected="false">Settings</button>
+            <button class="nav-link active" id="nav-players-tab" data-bs-toggle="pill" data-bs-target="#nav-players"
+                role="pill" aria-controls="nav-search" aria-selected="true">Players</button>
+        </div>
+    </nav>
+
+    <div class="tab-content text-light" id="nav-tabContent">
+
+        <!-- Game -->
+        <section class="tab-pane fade container" style="height: 100vh" id="nav-game" role="tabpanel"
+            aria-labelledby="nav-game-tab">
+            <div class="row justify-content-end" style="height: 1vh;"><i
+                    class="bi bi-patch-question col-2 fs-2 inline-block d-none" id="help-button"></i></div>
+            <div class="row" style="height: 100%">
+                <article class="text-center align-items-center col-10 offset-1 fs-1" style="height: 100%"
+                    id="text-container">
+                    <img class="align-self-center align-middle col-10"
+                        src="https://mystickermania.com/cdn/stickers/rick-and-morty/sticker_2062-512x512.png"
+                        alt="Pickle Brik">
+                </article>
+            </div>
+
+        </section>
+
+        <section class="tab-pane fade col-10 offset-1 fs-5" id="nav-settings" role="tabpanel"
+            aria-labelledby="nav-settings-tab">
+            <label for="slokken-input" class="form-label">Max slokken</label>
+            <input type="range" class="form-range" min="1" max="20" step="1" id="slokken-input">
+            <label for="tetten-input" class="form-label">Tette</label>
+            <input type="range" class="form-range" min="1" max="100" step="0.1" id="tetten-input">
+            <label for="duration-input" class="form-label">Max duratie regel</label>
+            <input type="range" class="form-range" min="0" max="20" step="1" id="duration-input">
+            <div class="form-check form-switch mt-2 text-start">
+                <input class="form-check-input" type="checkbox" role="switch" id="edge-cases-input" checked>
+                <label class="form-check-label" for="edge-cases-input">Edge cases <span style="font-size: 0.5em">(Discriminatie/Vrouwen haat/...)</span></label>
+            </div>
+            <div class="form-check form-switch mt-2 text-start">
+                <input class="form-check-input" type="checkbox" role="switch" id="to-be-continued-input" checked>
+                <label class="form-check-label" for="edge-cases-input">To be continued.. <span style="font-size: 0.5em">(vanaf nu..)</span></label>
+            </div>
+        </section>
+
+        <section class="tab-pane fade show active" id="nav-players" role="tabpanel" aria-labelledby="nav-players-tab">
+            <div id="namen"></div>
+            <i class="bi bi-plus-square-dotted fs-1 text" id="add-name"></i>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

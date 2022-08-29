@@ -1,15 +1,9 @@
 import * as util from "./util.js";
 import * as importrules from "./importrules.js";
+import settings from "./settings.js";
 
 const textContainer = document.getElementById('text-container');
 const helpButton = document.getElementById('help-button');
-const settings = {
-    slokken: document.getElementById('slokken-input'),
-    tetten: document.getElementById('tetten-input'),
-    duration: document.getElementById('duration-input'),
-    edgeCases: document.getElementById('edge-cases-input'),
-    toBeContinued: document.getElementById('to-be-continued-input'),
-}
 
 const namenContainer = document.getElementById("namen");
 let players = [];
@@ -55,7 +49,9 @@ export default class Rule {
                 }
             }
             while (slide.includes('$')) {
-                slide = slide.replace('$', Math.round(Math.random() * settings.slokken.value));
+                let sips = Math.round(Math.random() * settings.slokken.value);
+                sips = sips > 0 ? sips : 1;
+                slide = slide.replace('$', sips);
             }
             return slide;
         });
@@ -89,6 +85,15 @@ function next() {
                 goe = false;
             } else if (!settings.toBeContinued.value && rule.type === 'to-be-continued') {
                 goe = false;
+            } else {
+                const depthLimit = 50
+                const similarityTreshhold = 0.2;
+                const depth = count <= depthLimit ? count - 1 : depthLimit;
+                const history = Array.from(rules).slice(count - depth, count - 1).filter(r => !r.skipped);
+                if (history.some(h => stringSimilarity.compareTwoStrings(h.slides[0], rule.slides[0]) > similarityTreshhold)) {
+                    //te gelijkaardig aan een voorgaande rule
+                    goe = false;
+                }
             }
 
             if (goe === false) {
@@ -100,6 +105,7 @@ function next() {
             }
 
             if (goe === false) {
+                console.log("skipppp");
                 rule = rules[count++];
             }
         }

@@ -467,7 +467,7 @@ export function init() {
     ['Drink $ keer als je een politieke voorkeur hebt', 1, 0, '', ''],
     ['Drink $ keer als je ooit iemand hebt gekust na een slow dans', 1, 0, '', ''],
     ['Deel $ slokken uit als er ooit een krantenartikel over je is geschreven', 1, 0, '', ''],
-    ['Piano spelers dat weten hoe ze met 10 vingers spelen mogen $ slokken uitdelen', 1, 0, '', ''],
+    ['Piano spelers die weten hoe ze met 10 vingers spelen mogen $ slokken uitdelen', 1, 0, '', ''],
     ['Drink $ keer als je ooit op een paard hebt gereden', 1, 0, '', ''],
     ['Drink $ keer als je alcohol drinkt dat je (nog) niet hebt gekocht', 1, 0, '', ''],
     ['Deel $ slokken uit als je alcohol drinkt dat je gekocht hebt', 1, 0, '', ''],
@@ -482,7 +482,7 @@ export function init() {
     ['%s, geef de namen van 3 exen van %s of drink $ keer', 1, 2, '', ''],
     ['Meisjes drinken zoveel slokken als er knappe jongens meespelen', 1, 0, '', ''],
     ['Jongens drinken zoveel slokken als er knappe meisjes meespelen', 1, 0, '', ''],
-    ['Iedereen drinkt evenveel slokken als het aantal neukbare mensen die meespelen', 1, 0, '', ''],
+    ['Iedereen drinkt evenveel slokken als het aantal neukbare mensen die meespelen', 1, 0, '', '', 'Neukbaar = iemand die je zou doen, ik ben maar een programma maar zelfs ik weet dat er wel een paar slokken aan de orde zijn (;'],
     ['%s geef het inwonersaantal van Tajikistan (+ or - 1,000,000) of drink $ keer', 1, 1, '', ''],
     ['Deel $ slokken uit als je ooit een autoaccident hebt meegemaakt', 1, 0, '', ''],
     ['Deel $ slokken uit als je ooit een operatie hebt gehad', 1, 0, '', ''],
@@ -786,7 +786,7 @@ export function init() {
     ['"South Park characters", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
     ['"The erotic areas on a woman", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
     ['What rythmes with "itch", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
-    ['"PokÃ©mons", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
+    ['"Pokémons", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
     ['"Dragon Ball Z characters", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
     ['"Lord Of The Rings characters", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
     ['"The fingers of the hand", first person to repeat themselves or can\'t think of anything drinks $ times. %s, you start', 4, 1, '', ''],
@@ -1115,7 +1115,7 @@ export function init() {
     ['%s, write a silly post on Facebook with the words/verbs "overcook", "feta", "nipple" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "puff", "eggplant", "Lancelot" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "split", "Quasimodo", "washer" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
-    ['%s, write a silly post on Facebook with the words/verbs "copulate", "party", "PokÃ©mon" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
+    ['%s, write a silly post on Facebook with the words/verbs "copulate", "party", "Pokémon" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "create", "Smurfette", "jizz" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "burst", "sister", "Wolverine" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "yell", "watermelon", "coarse salt" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
@@ -1370,7 +1370,7 @@ export function init() {
     ['%s, write a silly post on Facebook with the words/verbs "piss", "pliers", "tapeworm" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "delight", "nail", "worm" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "joke", "raisin", "earwig" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
-    ['%s, write a silly post on Facebook with the words/verbs "hammer in", "CÃ©line Dion", "baked potato" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
+    ['%s, write a silly post on Facebook with the words/verbs "hammer in", "Céline Dion", "baked potato" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "cry", "grasshopper", "bukkake" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "dive", "train", "web" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
     ['%s, write a silly post on Facebook with the words/verbs "polish", "barricade", "glue" and "%s", end it with #brikola.be... Or down your drink', 15, 2, '', ''],
@@ -1566,7 +1566,11 @@ export function init() {
     ['%s, zeg de naam en leeftijd van elke speler. Elke persoon waarbij je het verpest, mag $ slokken uitdelen', 23, 1, '', '']];
 
     joink2.forEach(j => {
-        if (last[3] === j[4] && last[3] !== '' || last[4] === j[3] && last[4] !== '') {
+        if (j[0].includes('Facebook')) {
+            rules.push(new Rule([j[0]], j[4], "facebook", last[5] || ''));
+        } else if (j[0].includes('Would you rather')) {
+            rules.push(new Rule([j[0]], j[4], "would-you-rather", last[5] || ''));
+        } else if (last[3] === j[4] && last[3] !== '' || last[4] === j[3] && last[4] !== '') {
             const slides = j[3] === '' ? [last[0], j[0]] : [j[0], last[0]];
             rules.push(new Rule(slides, j[4], "to-be-continued", last[5] || ''));
         } else if (j[3] === '' && j[4] === '') {

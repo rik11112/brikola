@@ -58,23 +58,105 @@ export default class Rule {
         return succes;
     }
 
-    get next() {
-        if (type === 'to-be-continued') {
-            const returningRule = new Rule(this.slides.slice(1), this.name, this.type, this.help);
-            rules[count + Math.round(Math.random() * settings.duration)]
+    next() {
+        if (this.type === 'to-be-continued') {
+            const returningRule = new Rule(this.slides.slice(1), this.name, 'returning', this.help);
+            const returningIndex = count + Math.round(Math.random() * settings.duration);
+            console.log("to-be-continued return set at " + returningIndex);
+            rules = Array.from(rules);  //Making sure
+
+            //Array.splice returns the deleted elements (0 in this case). But also inserts returningRule at returningIndex in the existing array.
+            rules.splice(returningIndex, 0, returningRule);
+
+            //Now we delete the second slide in this rule so the prev button doesn't show it in the wrong place.
+            this.slides = [this.slides[0]];
+
+            return null;    //onnodig maar duidelijker.
+        } else if (this.slides.length > ++this.current) {
+            return this.slides(this.current);
         }
-        return this.slides(++current);
+        return null;    //null = volgende rule
     }
 
-    get prev() {
+    prev() {
         return this.slides(--current);
     }
 }
 
-
-
 function next() {
-    let rule = rules[count++];
+    //Huidige rule ophalen
+    let rule = rules[count];
+
+    //kijken of de huidige rule nog slides heeft
+    let slide = rule.next();
+    if (slide != null) {
+        //if so, slide tonen en klaar
+        textContainer.innerHTML = rule.slides[rule.current];
+        return;
+    }
+
+    //anders nieuwe rule
+    rule.active = false;
+    rule = rules[++count];  //count wordt geüpdated
+
+    //verifieëren dat deze rule goed is, anders blijven proberen
+    while (!verifyRule(rule)) {  //verify rule called ook rule.fill(); en zet slechte rules op skipped=true
+        rule = rules[++count];
+    }    
+
+    //Goedgekeurde rule op het scherm zetten
+    textContainer.innerHTML = rule.slides[rule.current];
+}
+
+function verifyRule(rule) {
+    let goe = true;
+    if (!settings.edgeCases.value && rule.slides.any(r => r.toLocaleLowerCase().includes("vrouw") || r.type.toLocaleLowerCase().includes('dark'))) {
+        goe = false;
+    } else if (!settings.toBeContinued.value && rule.type === 'to-be-continued') {
+        goe = false;
+    } else {
+        const depthLimit = 50
+        const similarityTreshhold = 0.2;
+        const depth = count <= depthLimit ? count - 1 : depthLimit;
+        const history = Array.from(rules).slice(count - depth, count - 1).filter(r => !r.skipped);
+        if (history.some(h => stringSimilarity.compareTwoStrings(h.slides[0], rule.slides[0]) > similarityTreshhold)) {
+            //te gelijkaardig aan een voorgaande rule
+            goe = false;
+        }
+    }
+
+    if (goe === false) {
+        //nie goe, skippe
+        rule.skipped = true;
+        rule.active = false;
+    } else {
+        //goe, probere te vullen
+        goe = rule.fill();
+    }
+
+    if (goe === false) {
+        rule.skipped = true;
+        rule.active = false;
+    }
+    return goe;
+}
+
+function nextOud() {
+    let rule = rules[count];
+
+    let slide = rule.next();
+    if (slide == null) {
+        rule.active = false;
+        rule = rules[++count];
+    } else {
+
+    }
+    rule.current++;
+    if (rule.type === 'to-be-continued' || rule.slides.count <= rule.current) {
+        rule.active = false;    //Zodat prev() werkt
+        next(); //Bij to-be-continued wordt de volgende slide later getoond via een andere Rule, als de slides op zijn go next zws.
+        return;
+    }
 
     if (!rule.active) {
         rule.active = true;
@@ -110,11 +192,7 @@ function next() {
             }
         }
     } else {
-        rule.current++;
-        if (rule.type === 'to-be-continued' || rule.slides.count <= rule.current) {
-            rule.active = false;    //Zodat prev() werkt
-            next(); //Bij to-be-continued wordt de volgende slide later getoond via een andere Rule, als de slides op zijn go next zws.
-        }
+        
     }
 
     textContainer.innerHTML = rule.slides[rule.current];

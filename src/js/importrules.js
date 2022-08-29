@@ -3,7 +3,7 @@ import Rule from "./game.js";
 export function init() {
     const rules = [];
     //nieuwe regels
-    rules.push(new Rule([''], 'gaybrapad', 'brik', `Een regenboogpad, ook wel regenboogzebrapad of gaybrapad, is een gedeelte van de openbare weg dat voorzien is van de kleuren van de regenboogvlag om daarmee aandacht te vragen voor diversiteit en acceptatie van lesbiennes, homoseksuelen, biseksuelen en transgenders (lhbt'ers).`))
+    rules.push(new Rule(['%s, hoeveel gaybrapaden heeft kasterlee?', 'Als je 1 zei, drink $ keer. Lichtaart heeft er 1, kasterlee is parking. Als je 0 zei, deel $ slokken uit.'], 'gaybrapad', 'brik', `Een regenboogpad, ook wel regenboogzebrapad of gaybrapad, is een gedeelte van de openbare weg dat voorzien is van de kleuren van de regenboogvlag om daarmee aandacht te vragen voor diversiteit en acceptatie van lesbiennes, homoseksuelen, biseksuelen en transgenders (lhbt'ers).`))
 
     //joink van brikola (met to-be-continued's)
     const joink = []

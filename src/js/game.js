@@ -66,8 +66,9 @@ export default class Rule {
         if (this.type === 'to-be-continued') {
             if (this.slides.length > 1) {
                 //eerste keer
+                const minDuration = 5;  //todo, regelen da da rekening houdt met skips. Das wel wa werk.
                 const returningRule = new Rule(this.slides.slice(1), this.name, 'returning', this.help);
-                const returningIndex = count + Math.round(Math.random() * settings.duration.value);
+                const returningIndex = count + Math.round(minDuration + Math.random() * (settings.duration.value - minDuration));
                 rules = Array.from(rules);  //Making sure
     
                 //Array.splice returns the deleted elements (0 in this case). But also inserts returningRule at returningIndex in the existing array.

@@ -12,9 +12,15 @@ const labels = {
     tetten: util.getById('tetten-label'),
     duration: util.getById('duration-label'),
 }
+const labelsValues = {
+    slokken: 'Max slokken',
+    tetten: 'Tette',
+    duration: 'Max duratie regel',
+}
 export default settings;
 
-let settingValues = localStorage.getItem('saved-settings') || {
+const savedSettingsKey = 'saved-settings';
+let settingValues = localStorage.getItem(savedSettingsKey) || {
     slokken: 6,
     tetten: 0,
     duration: 10,
@@ -27,5 +33,21 @@ Object.entries(settings).forEach(pair => {
     elem.value = settingValues[key];    //instellen van opgeslagen || default values
 
     //listeners plaatsen om labels en localStorage te updaten
-    
+    elem.addEventListener('input', e => {
+        let newValue = elem.value;
+        if (elem.type === 'range') {
+            //label update alleen bij ranges
+            let normalText = labelsValues[key];
+            let newText = `${normalText}: ${newValue}`;
+            labels[key].innerText = newText;
+            setTimeout(() => {
+                if (labels[key].innerText === newText) {
+                    labels[key].innerText = normalText;
+                }
+            }, 1000);
+        }
+        
+        settingValues[key] = newValue;
+        localStorage.setItem(savedSettingsKey, settingValues);
+    });
 });

@@ -5,6 +5,10 @@ let naamteller = -1;    //++naamteller maakt zo nog gebruik van het 0de element.
 const suggestions = [
     'Erica',
     'Dirk',
+    'vroemy',
+    'nys',
+    'michelle',
+    'spiegel',
     "Justin Cas",
     "Klaartje Kome",
     "Metje Ho",
@@ -30,7 +34,6 @@ const suggestions = [
     "Hans Schoen",
     "Anti Kip",
     "Philip Heynen",
-    "Fokje Modder",
     "Constant Lam",
     "Jos Tibant",
     "Coos Busters",
@@ -60,7 +63,6 @@ const suggestions = [
     "Patty Koot",
     "Connie Veren",
     "Douwe Schat",
-    "Dick Wijfje",
     "Barb Dwyer",
     "Pearl Button",
     "Hazel Nutt",
@@ -119,6 +121,7 @@ const suggestions = [
     'Dick Hop',
     'Jeu Boelen',
 ]
+suggestions.sort(s => Math.random() - 0.5);
 
 function addNameBox() {
     const container = document.createElement('div');

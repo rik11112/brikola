@@ -1565,18 +1565,38 @@ export function init() {
     ['%s, drinkt $ slokken. De buur rechts van hem 1 minder, tot 0 wordt bereikt', 23, 1, '', ''],
     ['%s, zeg de naam en leeftijd van elke speler. Elke persoon waarbij je het verpest, mag $ slokken uitdelen', 23, 1, '', '']];
 
+    let returning = new Array();
     joink2.forEach(j => {
         if (j[0].includes('Facebook')) {
-            rules.push(new Rule([j[0]], j[4], "facebook", last[5] || ''));
+            rules.push(new Rule([j[0]], j[3] || j[4], "facebook", last[5] || ''));
         } else if (j[0].includes('Would you rather')) {
-            rules.push(new Rule([j[0]], j[4], "would-you-rather", last[5] || ''));
-        } else if (last[3] === j[4] && last[3] !== '' || last[4] === j[3] && last[4] !== '') {
-            const slides = j[3] === '' ? [last[0], j[0]] : [j[0], last[0]];
-            rules.push(new Rule(slides, j[4], "to-be-continued", last[5] || ''));
-        } else if (j[3] === '' && j[4] === '') {
-            rules.push(new Rule([j[0]], j[3], 'joink2', j[5] || ''));
+            rules.push(new Rule([j[0]], j[3] || j[4], "would-you-rather", last[5] || ''));
+        } else if (j[3] !== '' || j[4] !== '') {
+            //deel van een to-be-continued rule
+            let name = j[3] || j[4];
+            let matchingRules = returning.filter(r => r.name === name);
+            if (matchingRules.length > 1) {
+                throw new Error(`matchingRules > 1, type:${type}`);
+            } else if (matchingRules.length === 1) {
+                // als hij al bestaat, voeg deze slide er aan toe.
+                matchingRules[0].slides.push(j[0]);
+            } else {
+                // anders voegen we hem toe aan returning
+                returning.push(new Rule([j[0]], name, "to-be-continued", last[5] || ''));
+            }
+        } else {
+            // normale regel
+            rules.push(new Rule([j[0]], j[3] || j[4], "joink2", last[5] || ''));
         }
-        last = j;
+    });
+
+    //Niet vergeten returning aan de rules toe te voegen, en de gefaalde hun type terugveranderen
+    returning.forEach(r => {
+        if (r.slides.length === 1) {
+            //normale regel
+            r.type = 'joink2';
+        }
+        rules.push(r);
     });
 
     rules.sort(rule => Math.random() - 0.5);

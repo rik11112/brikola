@@ -26,7 +26,7 @@ export default class Rule {
     constructor(slides, name, type, help) {
         this.slides = Array.from(slides);
         this.name = name;
-        this.current = 0;
+        this.current = -1;
         this.help = help;
         this.type = type;
         this.active = false;
@@ -53,6 +53,10 @@ export default class Rule {
                 sips = sips > 0 ? sips : 1;
                 slide = slide.replace('$', sips);
             }
+            //finishing touches
+            slide = slide.replace('1 slokken', '1 slok');
+            slide = slide.replace('1 times', '1 time');
+            slide = slide.replace('1 sips', '1 sip');
             return slide;
         });
         return succes;
@@ -60,20 +64,27 @@ export default class Rule {
 
     next() {
         if (this.type === 'to-be-continued') {
-            const returningRule = new Rule(this.slides.slice(1), this.name, 'returning', this.help);
-            const returningIndex = count + Math.round(Math.random() * settings.duration);
-            console.log("to-be-continued return set at " + returningIndex);
-            rules = Array.from(rules);  //Making sure
-
-            //Array.splice returns the deleted elements (0 in this case). But also inserts returningRule at returningIndex in the existing array.
-            rules.splice(returningIndex, 0, returningRule);
-
-            //Now we delete the second slide in this rule so the prev button doesn't show it in the wrong place.
-            this.slides = [this.slides[0]];
-
-            return null;    //onnodig maar duidelijker.
+            if (this.slides.length > 1) {
+                //eerste keer
+                const returningRule = new Rule(this.slides.slice(1), this.name, 'returning', this.help);
+                const returningIndex = count + Math.round(Math.random() * settings.duration.value);
+                rules = Array.from(rules);  //Making sure
+    
+                //Array.splice returns the deleted elements (0 in this case). But also inserts returningRule at returningIndex in the existing array.
+                rules.splice(returningIndex, 0, returningRule);
+                console.log(`to-be-continued return set at ${returningIndex}`);
+                console.log(rules);
+    
+                //Now we delete the second slide in this rule so the prev button doesn't show it in the wrong place.
+                this.slides = [this.slides[0]];
+    
+                return this.slides[++this.current]; //++current zodat deze slide niet nog eens wordt afgespeeld.
+            } else {
+                return null;
+            }
+            
         } else if (this.slides.length > ++this.current) {
-            return this.slides(this.current);
+            return this.slides[this.current];
         }
         return null;    //null = volgende rule
     }
@@ -87,11 +98,16 @@ function next() {
     //Huidige rule ophalen
     let rule = rules[count];
 
+    //Fill als dat nog niet gebeurd is (bv bij de eerste keer)
+    rule.fill()
+
     //kijken of de huidige rule nog slides heeft
     let slide = rule.next();
     if (slide != null) {
         //if so, slide tonen en klaar
-        textContainer.innerHTML = rule.slides[rule.current];
+        textContainer.innerHTML = slide;
+        console.log('rule: ' + count);
+        console.log(rule);
         return;
     }
 
@@ -105,7 +121,10 @@ function next() {
     }    
 
     //Goedgekeurde rule op het scherm zetten
-    textContainer.innerHTML = rule.slides[rule.current];
+    slide = rule.next();
+    textContainer.innerHTML = slide;  //houdt rekening met to-be-continued
+    console.log('rule: ' + count);
+    console.log(rule);
 }
 
 function verifyRule(rule) {
@@ -118,8 +137,8 @@ function verifyRule(rule) {
         const depthLimit = 50
         const similarityTreshhold = 0.2;
         const depth = count <= depthLimit ? count - 1 : depthLimit;
-        const history = Array.from(rules).slice(count - depth, count - 1).filter(r => !r.skipped);
-        if (history.some(h => stringSimilarity.compareTwoStrings(h.slides[0], rule.slides[0]) > similarityTreshhold)) {
+        const history = Array.from(rules).slice(0, count - 1).filter(r => !r.skipped).slice(-depth, undefined);  //alle voorgaande -> filter -> laatste [depth] elementen
+        if (history.some(h => rule.type === 'facebook' && h.type === 'facebook')) {
             //te gelijkaardig aan een voorgaande rule
             goe = false;
         }

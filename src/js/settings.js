@@ -19,13 +19,12 @@ const labelsValues = {
 }
 export default settings;
 
-const savedSettingsKey = 'saved-settings';
-let settingValues = localStorage.getItem(savedSettingsKey) || {
-    slokken: 6,
-    tetten: 0,
-    duration: 10,
-    edgeCases: false,
-    toBeContinued: true,
+let settingValues = {
+    slokken: localStorage.getItem('slokken') || 6,
+    tetten: localStorage.getItem('tetten') || 0,
+    duration: localStorage.getItem('duration') || 10,
+    edgeCases: localStorage.getItem('edgeCases') || false,
+    toBeContinued: localStorage.getItem('toBeContinued') || true,
 }
 
 Object.entries(settings).forEach(pair => {
@@ -46,8 +45,22 @@ Object.entries(settings).forEach(pair => {
                 }
             }, 1000);
         }
-        
-        settingValues[key] = newValue;
-        localStorage.setItem(savedSettingsKey, settingValues);
+
+        settingValues[key] = parseInt(newValue);
+        localStorage.setItem(key, settingValues[key]);
     });
 });
+
+
+//secret settings
+const settingsTab = util.getById('nav-settings-tab');
+let timePressDown;
+settingsTab.onpointerdown = function () {
+    timePressDown = Date.now();
+}
+settingsTab.onpointerup = function () {
+    let downHoldingTime = Date.now() - timePressDown;
+    if (downHoldingTime > 1000) {
+        util.getById('tetten-setting-container').classList.toggle('d-none');
+    }
+}

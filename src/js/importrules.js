@@ -4,6 +4,10 @@ export function init() {
     const rules = [];
     //nieuwe regels
     rules.push(new Rule(['%s, hoeveel gaybrapaden heeft kasterlee?', 'Als je 1 zei, drink $ keer. Lichtaart heeft er 1, kasterlee is parking. Als je 0 zei, deel $ slokken uit.'], 'gaybrapad', 'brik', `Een regenboogpad, ook wel regenboogzebrapad of gaybrapad, is een gedeelte van de openbare weg dat voorzien is van de kleuren van de regenboogvlag om daarmee aandacht te vragen voor diversiteit en acceptatie van lesbiennes, homoseksuelen, biseksuelen en transgenders (lhbt'ers).`))
+    rules.push(new Rule(['%s, Beantwoord dit raadsel juist of anders..: "Wat is de gelijkenis tussen kindjes en medusa?"', '"Ze maken mij allebei steenhard.", Juist? deel $ slokken uit, drink er anders $.'], 'medusa-dark','brik','Dark Humor jokes met dank aan Rinus Depraetere'));
+    rules.push(new Rule(['%s, Beantwoord dit raadsel juist of anders..: "Wat is het verschil tussen drugs en %s zijn/haar moeder?"', '"Ik pak geen drugs. (Vooral omdak een algoritme ben)", Juist? deel $ slokken uit, drink er anders $.'], 'drugsellema-dark','brik','Dark Humor jokes met dank aan Rinus Depraetere'));
+    rules.push(new Rule(['%s, Beantwoord dit raadsel juist of anders..: "Waarom zeg je je bestelling heel traag als er een vrouw achter den toog staat met een blauw oog?"', '"Ze kan duidelijk niet goed luisteren.", Juist? deel $ slokken uit, drink er anders $.'], 'toogblauwoog-dark','brik','Dark Humor jokes met dank aan Rinus Depraetere'));
+    rules.push(new Rule(['%s, Beantwoord dit raadsel juist of anders..: "Wat zegde tege een vrouw me blauw oog en lossen tand?"', '"Gade nei wel luistere?", Juist? deel $ slokken uit, drink er anders $.'], 'medusa-dark','brik','Dark Humor jokes met dank aan Rinus Depraetere'));
 
     //joink van brikola (met to-be-continued's)
     const joink = []
